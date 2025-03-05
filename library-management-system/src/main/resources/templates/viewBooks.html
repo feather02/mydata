@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>View Books</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+  <h1>Books Available</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Book Name</th>
+      <th>Book Number</th>
+      <th>Author Name</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="books : ${availablebooks}">
+      <td th:text="${books.bookName}"></td>
+      <td th:text="${books.bookId}"></td>
+      <td th:text="${books.author}"></td>
+      <td>
+        <a th:if="${books.available}"
+           th:href="@{/isAvailable(id=${books.id}, username=${session.loggedInUser.username})}"
+           style="margin-left: 0px;"
+           id="update_btn">Take</a>
+
+        <a th:unless="${books.available}"
+           th:href="@{/isAvailable(id=${books.id}, username=${session.loggedInUser.username})}"
+           style="margin-left: 0px;"
+           id="delete_btn">Return</a>
+
+        <span th:unless="${books.available}">Taken</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+Thymeleaf :
+-  Java-based library used to create a web application.
+- It provides a good support for serving a XHTML/HTML5 in web applications. 
+- add the Spring Boot Starter Thymeleaf dependency in the build configuration file.
+    <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+1. Basic Thymeleaf Syntax
+- Thymeleaf uses special attributes prefixed with th: to process dynamic data inside HTML templates.
+- Ex:
+	<p th:text="'Hello, ' + ${name}">Static Text</p>
+
+Attribute	Description				Example
+th:text	Replaces the text inside an HTML tag	<p th:text="${message}"></p>
+th:utext	Similar to th:text, but supports HTML content	<p th:utext="${htmlContent}"></p>
+th:value	Sets the value attribute of form fields	<input type="text" th:value="${username}" />
+th:href	Dynamically sets href for links	                  <a th:href="@{/home}">Home</a>
+th:src	Sets src attribute for images		<img th:src="@{/images/logo.png}" />
+th:each	Iterates over a list			<tr th:each="student : ${students}"><td th:text="${student.name}"></td></tr>
+th:if	Conditional rendering (if true, element is shown)	<p th:if="${user.loggedIn}">Welcome!</p>
+th:unless	Opposite of th:if (renders if false)		<p th:unless="${user.loggedIn}">Please log in</p>
+th:switch / th:case  Switch-case conditional rendering	<div th:switch="${status}"><p th:case="'admin'">Admin</p><p th:case="'user'">User</p></div>
+th:fragment	Defines a reusable fragment		<div th:fragment="header">Header Content</div>
+th:replace	Replaces an element with a fragment	<div th:replace="fragments/header :: header"></div>
+th:include	Includes another template inside a tag	<div th:include="fragments/sidebar :: sidebar"></div>
+
+* A relative URL (e.g., /students/add) automatically appends to the current domain and port (e.g., http://localhost:8080), forming http://localhost:8080/students/add.
+
+pom.xml common mistakes:
+- Use java version 17 or 21
+- add all the necessary dependencies - web, data jpa, lombok, mysql, thymeleaf
+- Use mysql-connector-j instead of mysql-connector-java
+
+- th:action="@{/adminlogin}" ensures the form submits to the correct URL.
+- th:object="${admin}" allows automatic mapping of form fields to an Admin object.
+- th:field="*{username}" binds the input field to the username property of the Admin object, enabling automatic data binding in Spring Boot. 
+
+
+
+
+Spring Boot - Database Handling
+- Spring Boot provides a very good support to create a DataSource for Database.
+- Just adding the dependencies and doing the configuration details is enough to create a DataSource and connect the Database.
+- add the Spring Boot Starter JDBC dependency in build configuration file.
+	<dependency>
+   	    <groupId>com.h2database</groupId>
+  	    <artifactId>h2</artifactId>
+  	    <scope>runtime</scope>
+	</dependency>
+- add the MySQL dependency into build configuration file.
+	<dependency>
+	   <groupId>mysql</groupId>
+	   <artifactId>mysql-connector-j</artifactId>
+	   <scope>runtime</scope>
+	</dependency>
+
+application.properties file:
+	spring.datasource.url = jdbc:mysql://localhost:3306/mydatabase
+	spring.datasource.username = root
+	spring.datasource.password = root
+
+Spring Boot - Securing Web Applications
+- If a Spring Boot Security dependency is added on the classpath, Spring Boot application automatically requires the Basic Authentication for all HTTP Endpoints. 
+- The Endpoint “/” and “/home” does not require any authentication. All other Endpoints require authentication.
+
+If any error occurs in spring boot security dependency, check
+1. package name is correct or not for all the java files
+2. if thymeleaf template is used, add the following in the application.properties file
+	spring.thymeleaf.prefix=classpath:/templates/
+	spring.thymeleaf.suffix=.html
+3. And check, login.html page is present in templates directory
+
+
+	
+//Adding encrpytion for passwords 
+
+1. Add dependency 
+	<dependency>
+	       <groupId>org.springframework.security</groupId>
+                	       <artifactId>spring-security-crypto</artifactId>
+	       <version>6.4.3</version>
+	</dependency>
+- add this dependency instead of spring-boot-starter-security, because spring-boot-starter-security will create a login form
+- but this dependency will not create a login form and allow us to use spring crypto classes and methods
+- To add security, use PasswordEncoder 
+-  PasswordEncoder does not encrypt the password—it hashes it
+   @Override
+    public void registerUser(User user) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword()); // Encrypt Password
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+    }
+- And we can't decrypt the encrypted password
+- Instead we can match the hashcode using match() method
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Override
+    public boolean getUserDetails(User user) {
+        // Find user by username
+        User existingUser = userRepository.findByUsername(user.getUsername());
+        // Check if user exists and if the password matches
+        if (existingUser != null && passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+            return true;
+        } else
+            return false;
+    }
+- Encryption (AES, DES) can be decrypted, which is insecure for passwords.
+- Hashing (BCrypt, Argon2, PBKDF2) is secure because it cannot be reversed.
+-  Use matches() to verify passwords instead of decrypting them.
+
+How Does PasswordEncoder Work?
+- It does NOT encrypt passwords.
+- It hashes passwords using BCrypt, Argon2, or other algorithms.
+- The output is a unique hash that cannot be reversed.
+- During login, matches() checks if the entered password generates the same hash.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

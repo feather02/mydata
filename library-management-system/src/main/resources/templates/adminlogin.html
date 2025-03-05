@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <title>Admin Login</title>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="card">
+            <h1>Admin Login</h1>
+
+            <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+            <form th:action="@{/adminlogin}" th:object="${admin}" method="post"><br>
+                <label for="username">Username:</label>
+                <input type="text" th:field="*{username}" id="username" required> <br><br>
+
+                <label for="password">Password:</label>
+                <input type="password" th:field="*{password}" id="password" required> <br><br>
+
+                <button type="submit" class="submit_btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

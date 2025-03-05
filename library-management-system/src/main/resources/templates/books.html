@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <title>Books</title>
+</head>
+<body>
+    <h1>Available books</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Book Name</th>
+            <th>Book Number</th>
+            <th>Author</th>
+            <th>Available</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="books : ${availablebooks}">
+            <td th:text="${books.bookName}"></td>
+            <td th:text="${books.bookId}"></td>
+            <td th:text="${books.author}"></td>
+            <td>
+                <span th:if="${books.available}" style="color: green;">Available</span>
+                <span th:if="${!books.available}" style="color: red;">Not Available</span>
+                <a th:href="@{/books/toggleAvailability/{id}(id=${books.id})}">[Change]</a>
+            </td>
+            <td><a th:href="@{/update/{id}(id=${books.id})}">Update</a></td>
+            <td><a th:href="@{/books/delete/{id}(id=${books.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br><br>
+
+<a href="/addbook" id="addBook" style="margin-left: 100px;margin-top: 50px;">Add a Book ></a>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Spring Boot Application</title>
+</head>
+<body>
+<h4>Student List</h4>
+<table>
+    <tr><th>ID</th><th>Name</th><th>Department</th></tr>
+    <tr th:each="students : ${students}">
+        <td th:text="${students.id}"></td>
+        <td th:text="${students.name}"></td>
+        <td th:text="${students.department}"></td>
+    </tr>
+</table>
+<a href="/students/add">Add Student</a>
+</body>
+</html>

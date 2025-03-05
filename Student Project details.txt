@@ -1,0 +1,4 @@
+Student project - MarketMate
+
+Current Daily Price of Various Commodities from Various Markets (Mandi)
+https://www.data.gov.in/resource/current-daily-price-various-commodities-various-markets-mandi

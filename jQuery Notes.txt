@@ -1,0 +1,219 @@
+jQuery:
+
+- The purpose of jQuery is to make it much easier to use JavaScript on your website.
+- jQuery is a lightweight, "write less, do more", JavaScript library.
+- The jQuery library contains the following features:
+	HTML/DOM manipulation
+	CSS manipulation
+	HTML event methods
+	Effects and animations
+	AJAX
+	Utilities
+- Adding jQuery to Your Web Pages
+There are several ways:
+	Download the jQuery library from jQuery.com
+	Include jQuery from a CDN, like Google (CDN - Content Delivery Network)
+- The jQuery library is a single JavaScript file, and you reference it with the HTML <script> tag (notice that the <script> tag should be inside the <head> section):
+	<head>
+		<script src="jquery-3.7.1.min.js"></script>
+	</head>
+
+- jQuery CDN
+- If you don't want to download and host jQuery yourself, you can include it from a CDN (Content Delivery Network).
+- Google CDN:
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	</head>
+
+jQuery Syntax
+- The jQuery syntax is tailor-made for selecting HTML elements and performing some action on the element(s).
+- Basic syntax is: 
+	$(selector).action()
+   where,
+	 $ sign to define/access jQuery
+	 (selector) to "query (or find)" HTML elements
+	 jQuery action() to be performed on the element(s)
+- Ex:
+	$("#test").hide() - hides the element with id="test".
+
+The Document Ready Event:
+- This is to prevent any jQuery code from running before the document is finished loading (is ready). 
+- syntax:
+	$(document).ready(function(){
+	       // jQuery methods go here...
+	});
+- even short method 
+	$(function(){
+	      // jQuery methods go here...
+	});
+
+jQuery Selectors
+- jQuery selectors allow you to select and manipulate HTML element(s).
+- All selectors in jQuery start with the dollar sign and parentheses: $()
+1. The element Selector
+- The jQuery element selector selects elements based on the element name.
+- Syntax:	$("elementName")
+- Example:
+	$(document).ready(function(){
+  	  $("button").click(function(){
+   	   $("p").hide();
+  	  });
+	});
+2. The #id Selector
+- The jQuery #id selector uses the id attribute of an HTML tag to find the specific element.
+- Syntax: $("#id")
+3. The .class Selector
+- The jQuery .class selector finds elements with a specific class.
+- Syntax: $(".className") 
+4. Other Selectors
+	$("*")		Selects all elements	
+	$(this)		Selects the current HTML element	
+	$("p.intro")		Selects all <p> elements with class="intro"	
+	$("p:first")		Selects the first <p> element	
+	$("ul li:first")	Selects the first <li> element of the first <ul>	
+	$("ul li:first-child")	Selects the first <li> element of every <ul>	
+	$("[href]")		Selects all elements with an href attribute	
+	$("a[target='_blank']")	Selects all <a> elements with a target attribute value equal to "_blank"	
+	$("a[target!='_blank']")	Selects all <a> elements with a target attribute value NOT equal to "_blank"	
+	$(":button")		Selects all <button> elements and <input> elements of type="button"	
+	$("tr:even")		Selects all even <tr> elements	
+	$("tr:odd")		Selects all odd <tr> elements
+
+- $(:type) -  type value is checked
+- $([atrributeName]) - attribute selector []
+
+Functions In a Separate File
+- Ex: <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="my_jquery_functions.js"></script>
+        </head>
+
+jQuery Event Methods
+- All the different visitors' actions that a web page can respond to are called events.
+- common DOM events:
+	Mouse Events	Keyboard Events	Form Events	Document/Window Events
+	click		keypress		submit		load
+	dblclick		keydown		change		resize
+	mouseenter		keyup		focus		scroll
+	mouseleave	 			blur		unload
+
+jQuery Syntax For Event Methods
+- In jQuery, most DOM events have an equivalent jQuery method.
+- To assign a click event to all paragraphs on a page, you can do this:
+- Ex:	$("p").click(function(){
+	     // action goes here!!
+	});
+
+Commonly Used jQuery Event Methods
+1. $(document).ready()
+     - The $(document).ready() method allows to execute a function when the document is fully loaded.
+
+2. click()
+     - The click() method attaches an event handler function to an HTML element.
+     - The function is executed when the user clicks on the HTML element.
+
+3. dblclick()
+     - The function is executed when the user double-clicks on the HTML element.
+
+4. mouseenter() - hovering in 
+     - The function is executed when the mouse pointer enters the HTML element.
+
+5. mouseleave() - out from hovering
+     - The function is executed when the mouse pointer leaves the HTML element.
+
+6. mousedown()
+     - The function is executed, when the left, middle or right mouse button is pressed down, while the mouse is over the HTML element.
+
+7. mouseup()
+     - The function is executed, when the left, middle or right mouse button is released, while the mouse is over the HTML element.
+
+8. hover()
+     - The hover() method takes two functions and is a combination of the mouseenter() and mouseleave() methods.
+
+9. focus()
+     - The function is executed when the form field gets focus.
+
+10. blur()
+      - The function is executed when the form field loses focus.
+
+11. The on() Method
+      - The on() method attaches one or more event handlers for the selected elements.
+
+
+jQuery Effects
+- Hide, Show, Toggle, Slide, Fade, and Animate. 
+
+1. jQuery hide() and show()
+     - With jQuery, we can hide and show HTML elements with the hide() and show() methods
+     - Syntax:
+	$(selector).hide(speed,callback);
+	$(selector).show(speed,callback);
+     -  optional speed parameter  values: "slow", "fast", or milliseconds.
+     - The optional callback parameter is a function to be executed after the hide() or show() method completes.
+
+2. jQuery toggle()
+     -  toggle between hiding and showing an element with the toggle() method.
+     - Shown elements are hidden and hidden elements are shown.
+     - Syntax:
+	$(selector).toggle(speed,callback);
+
+3. jQuery Fading Methods
+    - With jQuery you can fade an element in and out of visibility.
+    - fade methods:
+	fadeIn()
+	fadeOut()
+	fadeToggle()
+	fadeTo()
+
+fadeIn() Method
+- The jQuery fadeIn() method is used to fade in a hidden element.
+- Syntax:	$(selector).fadeIn(speed,callback);
+fadeOut() Method
+- The jQuery fadeOut() method is used to fade out a visible element.
+- Syntax:	$(selector).fadeOut(speed,callback);
+fadeToggle() Method
+- The jQuery fadeToggle() method toggles between the fadeIn() and fadeOut() methods.
+- If the elements are faded out, fadeToggle() will fade them in.
+- If the elements are faded in, fadeToggle() will fade them out.
+- Syntax:	$(selector).fadeToggle(speed,callback);
+fadeTo() Method
+- The jQuery fadeTo() method allows fading to a given opacity (value between 0 and 1).
+- Syntax:	$(selector).fadeTo(speed,opacity,callback);
+- In this speed and opacity parameters are required.
+
+4. jQuery Sliding Methods
+- With jQuery you can create a sliding effect on elements.
+- slide methods:
+	slideDown()
+	slideUp()
+	slideToggle()
+
+slideDown() Method
+- The jQuery slideDown() method is used to slide down an element.
+- Syntax:	$(selector).slideDown(speed,callback);
+slideUp() Method
+- The jQuery slideUp() method is used to slide up an element.
+- Syntax:	$(selector).slideUp(speed,callback);
+slideToggle() Method
+- The jQuery slideToggle() method toggles between the slideDown() and slideUp() methods.
+- If the elements have been slid down, slideToggle() will slide them up.
+- If the elements have been slid up, slideToggle() will slide them down.
+- Syntax:	$(selector).slideToggle(speed,callback);
+
+
+5. jQuery Animations - The animate() Method
+- The jQuery animate() method is used to create custom animations.
+- Syntax:	$(selector).animate({params},speed,callback);
+- The required params parameter defines the CSS properties to be animated.
+- By default, all HTML elements have a static position, and cannot be moved.
+- To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!
+- jQuery animate() - Manipulate Multiple Properties - Notice that multiple properties can be animated at the same time:
+
+Learn 
+AJAX + Spring Boot
+Relationships in Spring Data JPA
+Role Based Access Control in Spring Security
+
+
+
+
