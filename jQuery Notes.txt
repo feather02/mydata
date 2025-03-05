@@ -207,7 +207,60 @@ slideToggle() Method
 - The required params parameter defines the CSS properties to be animated.
 - By default, all HTML elements have a static position, and cannot be moved.
 - To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!
-- jQuery animate() - Manipulate Multiple Properties - Notice that multiple properties can be animated at the same time:
+- jQuery animate() - Manipulate Multiple Properties - Notice that multiple properties can be animated at the same time.
+
+6. jQuery stop() Method
+- The jQuery stop() method is used to stop an animation or effect before it is finished.
+- The stop() method works for all jQuery effect functions, including sliding, fading and custom animations.
+- Syntax:	$(selector).stop(stopAll,goToEnd);
+
+7. jQuery Callback Functions
+- A callback function is executed after the current effect is 100% finished.
+- JavaScript statements are executed line by line. However, with effects, the next line of code can be run even though the effect is not finished. This can create errors.
+- To prevent this, you can create a callback function.
+- A callback function is executed after the current effect is finished.
+- Typical syntax: 	$(selector).hide(speed,callback);
+
+8. jQuery - Chaining
+- With jQuery, you can chain together actions/methods.
+- Chaining allows us to run multiple jQuery methods (on the same element) within a single statement.
+- When chaining, the line of code could become quite long. However, jQuery is not very strict on the syntax; you can format it like you want, including line breaks and indentations.
+
+
+jQuery HTML
+1. jQuery - Get Content and Attributes
+jQuery DOM Manipulation
+- One very important part of jQuery is the possibility to manipulate the DOM.
+
+Get Content - text(), html(), and val()
+Three simple, but useful, jQuery methods for DOM manipulation are:
+
+text() - Sets or returns the text content of selected elements
+html() - Sets or returns the content of selected elements (including HTML markup)
+val() - Sets or returns the value of form fields
+
+Get Attributes - attr()
+The jQuery attr() method is used to get attribute values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Learn 
 AJAX + Spring Boot
