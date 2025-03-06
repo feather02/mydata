@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Dimensions Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("button").click(function() {
+                let width = $("#div1").width();
+                let height = $("#div1").height();
+                let innerWidth = $("#div1").innerWidth();
+                let innerHeight = $("#div1").innerHeight();
+                let outerWidth = $("#div1").outerWidth();
+                let outerHeight = $("#div1").outerHeight();
+                let outerWidthTrue = $("#div1").outerWidth(true);
+                let outerHeightTrue = $("#div1").outerHeight(true);
+
+                alert(
+                    "Width: " + width + "\n" +
+                    "Height: " + height + "\n" +
+                    "Inner Width: " + innerWidth + "\n" +
+                    "Inner Height: " + innerHeight + "\n" +
+                    "Outer Width: " + outerWidth + "\n" +
+                    "Outer Height: " + outerHeight + "\n" +
+                    "Outer Width (margin included): " + outerWidthTrue + "\n" +
+                    "Outer Height (margin included): " + outerHeightTrue
+                );
+            });
+        });
+    </script>
+</head>
+<body>
+    <button>Check Dimensions</button>
+    <div id="div1" style="width: 200px; height: 100px; padding: 10px; margin: 20px; border: 5px solid black; background-color: lightblue;">
+        Sample Div
+    </div>
+</body>
+</html>
