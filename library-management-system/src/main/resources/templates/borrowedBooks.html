@@ -8,23 +8,27 @@
 </head>
 <body>
 <h1>Borrowed Books</h1>
-<table>
-  <thead>
-  <tr>
-    <th>Book Name</th>
-    <th>Borrowed By</th>
-    <th>Due Date</th>
-    <th>Fine</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="borrowed : ${borrowedBooks}">
-    <td th:text="${borrowed.book.bookName}"></td>
-    <td th:text="${borrowed.user.username}"></td>
-    <td th:text="${borrowed.dueDate}"></td>
-    <td>No Fine</td>
-  </tr>
-  </tbody>
-</table>
+  <div id="align-center">
+    <table>
+      <thead>
+      <tr>
+        <th>Sl No</th>
+        <th>Book Name</th>
+        <th>Borrowed By</th>
+        <th>Due Date</th>
+        <th>Fine</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="borrowed : ${borrowedBooks}">
+        <td th:text="${borrowedStat.index+1}"></td>
+        <td th:text="${borrowed.book.bookName}"></td>
+        <td th:text="${borrowed.user.username}"></td>
+        <td th:text="${borrowed.dueDate}"></td>
+        <td>No Fine</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -51,7 +53,7 @@ public class UserController {
     public String userLogin(HttpSession session, Model model, @ModelAttribute("user") User user) {
         User loggedInUser = userService.getUserDetails(user);
         if (loggedInUser != null) {
-            session.setAttribute("loggedInUser", loggedInUser); // Store in session
+            session.setAttribute("loggedInUser", loggedInUser); // Store user in session
             model.addAttribute("user", loggedInUser);
             return "redirect:/viewBooks";
         } else {
@@ -60,12 +62,17 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/viewBooks")
-    public String viewBooksPage(Model model, @ModelAttribute("books") Books books) {
+    public String viewBooksPage(Model model) {
         List<Books> allBooks = booksService.getAllBooks();
+        if (allBooks == null) {
+            allBooks = new ArrayList<>(); // Prevent null errors
+        }
         model.addAttribute("availablebooks", allBooks);
         return "viewBooks";
     }
+
 
     @Transactional
     @GetMapping("/isAvailable")

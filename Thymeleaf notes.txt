@@ -1,0 +1,20 @@
+Safe Navigation operator (?):
+- The Safe Navigation operator (?) is used to avoid an unexpected NullPointerExceptions.
+- The save navigation operator will simply return null instead of throwing a NullPointerException.
+
+Loop a List by Index in Thymeleaf:
+- In Thymeleaf, we use th:each attribute for iteration. Thymeleaf th:each allows you to declare an iteration status variable.
+- In the below example, we are using ${employeeStat.index} expression to get an index of the list:
+	<tr th:each="employee : ${employees}">
+	 <td th:text="${employeeStat.index}"></td>
+	 <td th:text="${employee.firstName}"></td>
+	 <td th:text="${employee.lastName}"></td>
+	 <td th:text="${employee.email}"></td>
+	</tr>
+- The employeeStat is the aggregation of the variable employee with the suffix Stat.
+
+The th:case = "*" is the default case of the th:switch/th:case structure.
+
+
+CSS not working in Chrome but does in Firefox?
+- Try forcing a cache refresh in chrome by pressing Shift + F5

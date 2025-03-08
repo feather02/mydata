@@ -8,19 +8,23 @@
 </head>
 <body>
 <h1>Registered Users</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Username</th>
-        <th>Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${registeredUsers}">
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.email}"></td>
-    </tr>
-    </tbody>
-</table>
+<div id="align-center">
+    <table>
+        <thead>
+        <tr>
+            <th>Sl No</th>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${registeredUsers}">
+            <td th:text="${userStat.index +1}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

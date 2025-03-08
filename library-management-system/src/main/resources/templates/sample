@@ -1,0 +1,8 @@
+lombok issue fix
+dependency injection - 3 ways
+primary , qualifier, autowired, component
+@Scope
+
+ResponseEntity
+
+parse - examine / to divide

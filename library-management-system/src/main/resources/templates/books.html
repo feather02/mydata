@@ -9,34 +9,36 @@
 </head>
 <body>
     <h1>Available books</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Book Name</th>
-            <th>Book Number</th>
-            <th>Author</th>
-            <th>Available</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="books : ${availablebooks}">
-            <td th:text="${books.bookName}"></td>
-            <td th:text="${books.bookId}"></td>
-            <td th:text="${books.author}"></td>
-            <td>
-                <span th:if="${books.available}" style="color: green;">Available</span>
-                <span th:if="${!books.available}" style="color: red;">Not Available</span>
-                <a th:href="@{/books/toggleAvailability/{id}(id=${books.id})}">[Change]</a>
-            </td>
-            <td><a th:href="@{/update/{id}(id=${books.id})}">Update</a></td>
-            <td><a th:href="@{/books/delete/{id}(id=${books.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <br><br>
-
-<a href="/addbook" id="addBook" style="margin-left: 100px;margin-top: 50px;">Add a Book ></a>
+    <div id="align-center">
+        <table>
+            <thead>
+            <tr>
+                <th>Book Name</th>
+                <th>Book Number</th>
+                <th>Author</th>
+                <th>Available</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="books : ${availablebooks}">
+                <td th:text="${books.bookName}"></td>
+                <td th:text="${books.bookId}"></td>
+                <td th:text="${books.author}"></td>
+                <td>
+                    <span th:if="${books.available}" style="color: green;">Available</span>
+                    <span th:if="${!books.available}" style="color: red;">Not Available</span>
+                    <a th:href="@{/books/toggleAvailability/{id}(id=${books.id})}">[Change]</a>
+                </td>
+                <td><a th:href="@{/update/{id}(id=${books.id})}" id="update_btn">Update</a></td>
+                <td><a th:href="@{/books/delete/{id}(id=${books.id})}" onclick="return confirm('Are you sure?')" id="delete_btn">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+<br>
+<a href="/addbook" id="addBook" style="margin-left: 100px;margin-top: 200px;">Add a Book ></a>
 </body>
 </html>
