@@ -27,11 +27,13 @@ Exam Portal
 - teacher can create questions at any day, but they should "on" to visible to students 
 
 Student
+- student register
 - student login
 - student dashboard 
 	profile - view details 
 	exam - exam no , exam name , button - attend exam
 	result - exam no, exam name , marks
+
 Admin 
 - Login
 - Add Faculties 
@@ -43,6 +45,18 @@ Faculty
     - No of questions
 	- Question Form - qn, option 1,2,3,4 , correct answer 
 
+
+
+
+
+
+
+
+result - exam id , exam name , faculty name, student
+
+
+
+
 database - exam system 
 Tables required:
 admin - username , password
@@ -51,3 +65,5 @@ faculty - username, password
 exam - exam id, exam name, faculty name
 questions - exam id, qn, option 1,2,3,4 , correct answer 
 
+
+result table - examId,examName, studentName, student - rollno , marks 

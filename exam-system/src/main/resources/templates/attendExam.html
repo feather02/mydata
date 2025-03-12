@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Attend Exam</title>
+</head>
+<body>
+<span>Exam No : </span><span th:text="${examId}"></span>
+<br><br>
+<form th:action="@{/submitExam}" method="post" th:object="${examSubmission}">
+    <input type="hidden" th:field="*{examId}">
+
+    <div th:each="qn : ${questionSet}">
+        <h3 th:text="'Question No ' + ${qn.questionNumber}"></h3>
+        <p th:text="${qn.question}"></p>
+
+        <input type="radio" th:field="*{answers[__${qn.questionId}__]}" value="1"/> <span th:text="${qn.option1}"></span>
+        <input type="radio" th:field="*{answers[__${qn.questionId}__]}" value="2"/> <span th:text="${qn.option2}"></span>
+        <input type="radio" th:field="*{answers[__${qn.questionId}__]}" value="3"/> <span th:text="${qn.option3}"></span>
+        <input type="radio" th:field="*{answers[__${qn.questionId}__]}" value="4"/> <span th:text="${qn.option4}"></span>
+    </div>
+
+    <button type="submit">SUBMIT</button>
+</form>
+
+</body>
+</html>

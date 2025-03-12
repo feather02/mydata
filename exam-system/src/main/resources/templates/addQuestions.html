@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Questions</title>
+</head>
+<body>
+<h2>Add Questions</h2>
+
+<form th:action="@{/submitQuestions}" th:object="${questionForm}" method="post">
+  <input type="hidden" name="examId" th:value="${examId}">
+
+  <div th:each="i : ${#numbers.sequence(0, noOfQuestions - 1)}">
+    <h3>Question No: <span th:text="${i + 1}"></span></h3>
+    <input type="hidden" th:field="*{questionList[__${i}__].questionNumber}" th:value="${i + 1}">
+    <label>Question:</label>
+    <input type="text" th:field="*{questionList[__${i}__].question}" required> <br><br>
+
+    <label>Option 1:</label>
+    <input type="text" th:field="*{questionList[__${i}__].option1}" required> <br><br>
+
+    <label>Option 2:</label>
+    <input type="text" th:field="*{questionList[__${i}__].option2}" required> <br><br>
+
+    <label>Option 3:</label>
+    <input type="text" th:field="*{questionList[__${i}__].option3}" required> <br><br>
+
+    <label>Option 4:</label>
+    <input type="text" th:field="*{questionList[__${i}__].option4}" required> <br><br>
+
+    <label>Correct Answer:</label>
+    <select th:field="*{questionList[__${i}__].answer}">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select> <br><br>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

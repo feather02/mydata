@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+    <script>
+        window.onload = function() {
+          var successMessage = document.getElementById("successMessage");
+          if (successMessage && successMessage.innerText.trim() !== "") {
+            alert(successMessage.innerText);
+            document.getElementById("studentName").value = "";
+            document.getElementById("rollNo").value = "";
+            document.getElementById("department").value = "";
+            document.getElementById("year").value = "";
+          }
+        }
+      </script>
+</head>
+<body>
+<div id="outer">
+    <h2>Student Registration</h2>
+    <div id="card">
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+        <p th:if="${success}" th:text="${success}" id="successMessage" style="color: green; display: none;"></p>
+        <form th:action="@{/student/register}" th:object="${student}" method="post">
+            <label for="studentName">Student Name : </label>
+            <input type="text" th:field="*{studentName}" name="studentName" id="studentName" required> <br>
+            <br>
+            <label for="rollNo">RollNo : </label>
+            <input type="number" min="1000" max="9999" th:field="*{rollNo}" name="rollNo" id="rollNo" required> <br>
+            <br>
+            <label for="department">Department : </label>
+            <select th:field="*{department}" name="department" id="department" required>
+                <option value="">Select Department</option>
+                <option value="IT">IT</option>
+                <option value="CSE">CSE</option>
+                <option value="MECH">MECH</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="CIVIL">CIVIL</option>
+            </select> <br>
+            <br>
+            <label for="year">Year : </label>
+            <input type="number" min="1" max="4" th:field="*{year}" name="year" id="year" required> <br>
+            <br>
+            <label for="password">Password : </label>
+            <input type="password" th:field="*{password}" name="password" id="password" required> <br><br>
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+</head>
+<body>
+<h2>Student Dashboard</h2>
+<button id="stu_profile">Student Profile</button>
+<button id="attend_exam">Attend Exam</button>
+<button id="view_result">View Result</button>
+
+<div id="profile_section" th:if="${student != null}">
+    <table>
+        <tr>
+            <th>Student Name</th>
+            <td th:text="${student.studentName} ?: 'N/A'"></td>
+        </tr>
+        <tr>
+            <th>Roll No</th>
+            <td th:text="${student.rollNo} ?: 'N/A'"></td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td th:text="${student.department} ?: 'N/A'"></td>
+        </tr>
+        <tr>
+            <th>Year</th>
+            <td th:text="${student.year} ?: 'N/A'"></td>
+        </tr>
+    </table>
+</div>
+
+<!-- If student data is missing, show an error message -->
+<div th:if="${student == null}">
+    <p style="color: red;">Error: Student details not found. Please log in again.</p>
+</div>
+
+<div id="exam_section">
+    <table>
+        <tr>
+            <th>Exam No</th>
+            <th>Exam Name</th>
+            <th>Faculty Name</th>
+            <th>Attend Exam</th>
+        </tr>
+        <div th:each="exam : ${exams}">
+            <tr th:if="${exam.status}">
+                <td th:text="${exam.examId}"></td>
+                <td th:text="${exam.examName}"></td>
+                <td th:text="${exam.faculty.username}"></td>
+                <td>
+                    <a th:href="@{/attendExam/{examId}(examId=${exam.examId})}">Attend</a>
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
+
+</body>
+</html>

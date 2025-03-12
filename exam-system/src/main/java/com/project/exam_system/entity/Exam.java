@@ -1,9 +1,6 @@
 package com.project.exam_system.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +13,19 @@ import org.springframework.stereotype.Component;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Admin {
+public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String username;
-    private String password;
+    private int examId;
+
+    private String examName;
+
+    private Integer noOfQuestions;
+
+    @ManyToOne
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id", nullable = false)
+    private Faculty faculty;
+
+    private Boolean status = false;
 }
+
