@@ -20,7 +20,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "examId", referencedColumnName = "examId", nullable = false)
-    private Exam exam;  // Reference to Exam entity, but only exam_id will be stored
+    private Exam exam;
 
     private int questionNumber;
     private String question;
@@ -29,5 +29,6 @@ public class Question {
     private String option3;
     private String option4;
     private int answer;
+
 }
 

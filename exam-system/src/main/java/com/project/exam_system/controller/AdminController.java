@@ -4,6 +4,7 @@ import com.project.exam_system.entity.Admin;
 import com.project.exam_system.entity.Faculty;
 import com.project.exam_system.service.AdminService;
 import com.project.exam_system.service.FacultyService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,9 +35,10 @@ public class AdminController {
     }
 
     @PostMapping("/admin/login")
-    public String adminLogin(Model model, @ModelAttribute("admin") Admin admin) {
+    public String adminLogin(HttpSession session, Model model, @ModelAttribute("admin") Admin admin) {
         Admin admin1 = adminService.getAdminDetails(admin);
         if (admin1 != null && passwordEncoder.matches(admin.getPassword(), admin1.getPassword())) {
+            session.setAttribute("loggedAdmin",admin);
             model.addAttribute("success", "Login Successful");
             return "redirect:/adminDashboard";
         } else {
@@ -46,25 +48,53 @@ public class AdminController {
     }
 
     @GetMapping("/adminDashboard")
-    public String adminDashboardPage() {
+    public String adminDashboardPage(HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("loggedAdmin");
+        if (admin ==null) {
+            return "redirect:/admin/login";
+        }
+
         return "adminDashboard";
     }
 
     @GetMapping("/add/faculty")
-    public String addFacultyPage(Model model) {
+    public String addFacultyPage(HttpSession session,Model model) {
+        Admin admin = (Admin) session.getAttribute("loggedAdmin");
+
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+
         model.addAttribute("faculty", new Faculty());
         return "addFaculty";
     }
 
     @PostMapping("/faculty/register")
-    public String facultyRegister(Model model, @ModelAttribute("faculty") Faculty faculty) {
+    public String facultyRegister(HttpSession session,Model model, @ModelAttribute("faculty") Faculty faculty) {
+        Admin admin = (Admin) session.getAttribute("loggedAdmin");
+
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+
         if(facultyService.registerFaculty(faculty)) {
             model.addAttribute("success", "Faculty added successfully!");
-            return "addFaculty";
+            return "addFacultySuccessful";
         } else {
             model.addAttribute("error", "Faculty already exists");
             return "addFaculty";
         }
+    }
+
+    @GetMapping("/goToAdminDashboard")
+    public String goToAdminDashboard() {
+        return "redirect:/adminDashboard";
+    }
+
+    @GetMapping("/admin/logout")
+    public String adminLogout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 
     //    @PostMapping("/admin/register")

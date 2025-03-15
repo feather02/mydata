@@ -25,4 +25,36 @@ public class ResultServiceImpl implements ResultService {
                 List<Result> result = resultRepository.findByExamIdAndRollNo(examId,rollNo);
                 return !result.isEmpty();
         }
+
+
+        @Override
+        @Transactional
+        public void publishResult(int examId) {
+                List<Result> results = resultRepository.findByExamId(examId);
+
+                if (!results.isEmpty()) {
+                        boolean currentStatus = results.get(0).getPublished(); // Check current status
+                        boolean newStatus = !currentStatus; // Toggle the status
+
+                        for (Result result : results) {
+                                result.setPublished(newStatus);
+                        }
+                        resultRepository.saveAll(results);
+                }
+        }
+
+        @Override
+        public List<Result> getAllResults() {
+                return resultRepository.findAll();
+        }
+
+        @Override
+        public List<Result> getResultById(String studentRollNo) {
+                return resultRepository.findByStudentRollNo(studentRollNo);
+        }
+
+        @Override
+        public Result getPublishedDetail(int examId) {
+                return resultRepository.getPublishedById(examId);
+        }
 }

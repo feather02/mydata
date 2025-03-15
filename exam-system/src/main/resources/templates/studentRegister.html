@@ -7,7 +7,7 @@
         window.onload = function() {
           var successMessage = document.getElementById("successMessage");
           if (successMessage && successMessage.innerText.trim() !== "") {
-            alert(successMessage.innerText);
+            //alert(successMessage.innerText);
             document.getElementById("studentName").value = "";
             document.getElementById("rollNo").value = "";
             document.getElementById("department").value = "";
@@ -41,7 +41,13 @@
             </select> <br>
             <br>
             <label for="year">Year : </label>
-            <input type="number" min="1" max="4" th:field="*{year}" name="year" id="year" required> <br>
+            <select th:field="*{year}" name="year" id="year" required>
+              <option value="">Select Year</option>
+              <option value="1">First Year</option>
+              <option value="2">Second Year</option>
+              <option value="3">Third Year</option>
+              <option value="4">Final Year</option>
+            </select><br>
             <br>
             <label for="password">Password : </label>
             <input type="password" th:field="*{password}" name="password" id="password" required> <br><br>

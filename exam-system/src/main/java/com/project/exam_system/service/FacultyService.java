@@ -6,4 +6,6 @@ public interface FacultyService {
     Boolean registerFaculty(Faculty faculty);
 
     Faculty loginFaculty(Faculty faculty);
+
+    Faculty findByUsername(String username);
 }

@@ -1,0 +1,33 @@
+Intern Topics Covered:
+
+1. Spring Intro 
+2. SpringBoot Intro
+3. REST API's
+
+Spring Data JPA - Intro , REST API's, Relationships
+
+12/03/2025
+1. Introduction to Spring Data JPA
+2. @Entity - ORM - Mapping using Data JPA
+3. JpaRepository interface
+4. REST API's with Data JPA
+
+13/03/2025
+1. Spring Data JPA -  @Embeddable and @Embedded
+2. Defining Query Methods
+3. @Query - nativeQuery(SQL), JPQL
+4. Relationships 
+
+14/03/2025
+1. Paging and Sorting using Spring Data JPA
+2. DTO pattern
+3. Exception Handling
+
+
+Next:
+1. Exception Handling 
+2. Actuator
+3. DTO pattern
+4. Git 
+5. Frontend Connectivity
+6. Spring Security 

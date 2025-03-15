@@ -1,10 +1,7 @@
 package com.project.exam_system.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "result")
 public class Result {
     @Id
@@ -25,13 +23,15 @@ public class Result {
     private String studentRollNo;
     private int noOfQuestions;
     private int marks;
+    private Boolean published;
 
-    public Result(int examId, String examName, String studentName, Integer rollNo, int totalQuestions, int score) {
+    public Result(int examId, String examName, String studentName, Integer rollNo, int totalQuestions, int score, Boolean published) {
         this.examId = examId;
         this.examName = examName;
         this.studentName = studentName;
         this.studentRollNo = rollNo.toString();
         this.noOfQuestions = totalQuestions;
         this.marks = score;
+        this.published = published;
     }
 }

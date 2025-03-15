@@ -9,6 +9,7 @@
 <button id="stu_profile">Student Profile</button>
 <button id="attend_exam">Attend Exam</button>
 <button id="view_result">View Result</button>
+<button id="view_result"><a th:href="@{/student/logout}">Logout</a></button>
 
 <div id="profile_section" th:if="${student != null}">
     <table>
@@ -36,7 +37,7 @@
     <p style="color: red;">Error: Student details not found. Please log in again.</p>
 </div>
 
-<div id="exam_section">
+<div id="exam_section" style="display: none;">
     <table>
         <tr>
             <th>Exam No</th>
@@ -56,6 +57,54 @@
         </div>
     </table>
 </div>
+<br><br>
+<!-- Create result section -->
+
+<div id="result_section" style="display: none;">
+    <table>
+        <thead>
+        <tr>
+            <th>Exam No</th>
+            <th>Exam Name</th>
+            <th>Marks Gained</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="result : ${result}">
+            <td th:text="${result.examId}"></td>
+            <td th:text="${result.examName}"></td>
+            <td th:text="${result.marks} + '/' + ${result.noOfQuestions} "></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    profile = document.getElementById("stu_profile");
+    exam = document.getElementById("attend_exam");
+    result = document.getElementById("view_result");
+
+    profile_section = document.getElementById("profile_section");
+    exam_section = document.getElementById("exam_section");
+    result_section = document.getElementById("result_section");
+
+    profile.addEventListener("click", () => {
+        profile_section.style.display = "block";
+        exam_section.style.display = "none";
+        result_section.style.display = "none";
+    });
+
+    exam.addEventListener("click", () => {
+        profile_section.style.display = "none";
+        exam_section.style.display = "block";
+        result_section.style.display = "none";
+    });
+
+    result.addEventListener("click", () => {
+        profile_section.style.display = "none";
+        exam_section.style.display = "none";
+        result_section.style.display = "block";
+    });
+</script>
 
 </body>
 </html>

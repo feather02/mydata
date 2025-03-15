@@ -49,7 +49,12 @@ public class ExamController {
     }
 
     @GetMapping("/addQuestions")
-    public String addQuestionsPage(@RequestParam int examId, @RequestParam int noOfQuestions, Model model) {
+    public String addQuestionsPage(HttpSession session, @RequestParam int examId, @RequestParam int noOfQuestions, Model model) {
+        Faculty faculty = (Faculty) session.getAttribute("loggedFaculty");
+        if (faculty == null) {
+            return "redirect:/faculty/login";
+        }
+
         Exam exam = examService.getExamById(examId);
         if (exam == null) {
             return "errorPage";  // Handle invalid exam
@@ -108,7 +113,7 @@ public class ExamController {
             return "redirect:/student/login"; // Redirect if not logged in
         }
 
-        Boolean alreadyDone = resultService.getAlreadyDone(examId,student.getRollNo());
+        Boolean alreadyDone =resultService.getAlreadyDone(examId,student.getRollNo());
         if(alreadyDone) {
             return "examAlreadyDone";
         }
@@ -165,6 +170,11 @@ public class ExamController {
             }
         }
 
+        Result resultCheck = resultService.getPublishedDetail(examId);
+        boolean pub = false;
+        if (resultCheck != null)
+            pub = resultCheck.getPublished();
+
         // Save result
         Result result = new Result(
                 examId,
@@ -172,7 +182,8 @@ public class ExamController {
                 student.getStudentName(),
                 student.getRollNo(),
                 totalQuestions,
-                score
+                score,
+                pub
         );
         resultService.saveResult(result);
 

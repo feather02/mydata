@@ -12,4 +12,13 @@ import java.util.List;
 public interface ResultRepository extends JpaRepository<Result, Long> {
     @Query("SELECT r FROM Result r WHERE r.examId = :examId AND r.studentRollNo = :rollNo")
     List<Result> findByExamIdAndRollNo(@Param("examId") int examId, @Param("rollNo") Integer rollNo);
+
+    List<Result> findByExamId(int examId);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM result WHERE student_roll_no =?1 AND published = true")
+    List<Result> findByStudentRollNo(String studentRollNo);
+
+    @Query("SELECT r FROM Result r WHERE r.examId = ?1")
+    Result getPublishedById(int examId);
+
 }

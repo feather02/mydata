@@ -1,0 +1,18 @@
+1. To change the default banner of Spring Boot run terminal, 
+	Create a file named banner.txt in Resources folder 
+	And give whateever content we want - banner, text, caption
+	Can use online Spring Boot banner.txt generator
+
+2. th:text is equal to data-th-text (in thymeleaf library)
+
+3. Spring Boot log format 
+    [Timestamp] [Log Level] [Process ID] --- [Thread Name] [Logger Name] : [Log Message]
+
+	2025-03-15T13:40:58.099+05:30 - IST (Indian Standard Time)
+	UTC—Coordinated Universal Time
+
+4. Ctrl + C -  it copies the selected text (if any).
+                  - If no text is selected, it copies the entire current line to the clipboard.
+
+5. Shift + F5 - performs a "hard refresh" or "forced reload," which bypasses the browser's cache and retrieves the latest version of the page from the server. 
+   Ctrl + F5 - performs a "hard refresh" which forces the browser to reload the webpage from the server, bypassing the cache and ensuring you see the latest version. (Use this)

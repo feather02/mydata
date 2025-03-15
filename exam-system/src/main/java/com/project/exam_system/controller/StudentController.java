@@ -1,6 +1,7 @@
 package com.project.exam_system.controller;
 
 import com.project.exam_system.entity.Exam;
+import com.project.exam_system.entity.Result;
 import com.project.exam_system.entity.Student;
 import com.project.exam_system.service.ExamService;
 import com.project.exam_system.service.ResultService;
@@ -41,7 +42,7 @@ public class StudentController {
         if (student1 == null) {
             studentService.registerStudent(student);
             model.addAttribute("success", "Student registered successfully!");
-            return "studentRegister";
+            return "studentRegisterSuccessful";
         } else {
             model.addAttribute("error", "Student already exists");
             return "studentRegister";
@@ -75,9 +76,22 @@ public class StudentController {
             return "redirect:/student/login"; // Redirect if not logged in
         }
 
+//        System.out.println(student.getRollNo());
+
+        List<Result> getResult = resultService.getResultById(String.valueOf(student.getRollNo()));
+        model.addAttribute("result", getResult);
+//        System.out.println(getResult);
+
         List<Exam> getAllExams = examService.getAllExams();
         model.addAttribute("exams", getAllExams);
         model.addAttribute("student", student);
         return "studentDashboard";
+    }
+
+    @GetMapping("/student/logout")
+    public String studentLogout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+
     }
 }

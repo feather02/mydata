@@ -31,4 +31,9 @@ public class FacultyServiceImpl implements FacultyService {
     public Faculty loginFaculty(Faculty faculty) {
        return facultyRepository.findExistByUsername(faculty.getUsername());
     }
+
+    @Override
+    public Faculty findByUsername(String username) {
+        return facultyRepository.findByUsername(username);
+    }
 }

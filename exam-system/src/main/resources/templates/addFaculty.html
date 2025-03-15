@@ -7,7 +7,7 @@
     window.onload = function() {
       var successMessage = document.getElementById("successMessage");
       if (successMessage && successMessage.innerText.trim() !== "") {
-        alert(successMessage.innerText);
+        //alert(successMessage.innerText);
         document.getElementById("username").value = "";
         document.getElementById("password").value = "";
       }
@@ -30,5 +30,6 @@
     </form>
   </div>
 </div>
+  <button><a th:href="@{/goToAdminDashboard}">Go Back</a></button>
 </body>
 </html>

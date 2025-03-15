@@ -5,33 +5,45 @@
     <title>Faculty Dashboard</title>
 </head>
 <body>
-    <h2>Faculty Dashboard</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Exam No</th>
-                <th>Exam Name</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="exam : ${exams}">
-                <td th:text="${exam.examId}"></td>
-                <td th:text="${exam.examName}"></td>
-                <td>
-                    <a th:if="${exam.status}"
-                       th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty != null ? session.loggedFaculty.username : ''})}"
-                       style="margin-left: 0px;"
-                       id="on_btn">ON</a>
+<h2>Faculty Dashboard</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Exam No</th>
+        <th>Exam Name</th>
+        <th>Status</th>
+        <th>Result</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="exam : ${exams}">
+        <td th:text="${exam.examId}"></td>
+        <td th:text="${exam.examName}"></td>
+        <td>
+            <a th:if="${exam.status}"
+               th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty != null ? session.loggedFaculty.username : ''})}"
+               style="margin-left: 0px;"
+               class="status-btn">ON</a>
 
-                    <a th:unless="${exam.status}"
-                       th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty.username})}"
-                       style="margin-left: 0px;"
-                       id="off_btn">OFF</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <button><a th:href="@{/create}">Create Exam</a></button>
+            <a th:unless="${exam.status}"
+               th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty.username})}"
+               style="margin-left: 0px;"
+               class="status-btn">OFF</a>
+        </td>
+        <td>
+            <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and resultMap[exam.examId][0].published}"
+               th:href="@{/publish(examId=${exam.examId})}" class="pub">UNPUBLISH</a>
+
+            <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and !resultMap[exam.examId][0].published}"
+               th:href="@{/publish(examId=${exam.examId})}" class="unpub">PUBLISH</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button><a th:href="@{/create}">Create Exam</a></button>
+<br><br>
+<button><a th:href="@{/faculty/logout}">Logout</a></button>
+
+
 </body>
 </html>
