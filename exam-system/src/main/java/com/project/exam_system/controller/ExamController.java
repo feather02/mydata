@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ExamController {
@@ -134,7 +132,6 @@ public class ExamController {
         return "attendExam";
     }
 
-
     @PostMapping("/submitExam")
     public String submitExam(@ModelAttribute ExamSubmissionDTO examSubmission,
                              HttpSession session,
@@ -146,12 +143,11 @@ public class ExamController {
         }
 
         int examId = examSubmission.getExamId();
-        Map<Integer, String> answers = examSubmission.getAnswers();
-
-        System.out.println("Submitted Answers: " + answers);
+        Map<Integer, String> answers = Optional.ofNullable(examSubmission.getAnswers()).orElse(Collections.emptyMap());
 
         Exam exam = examService.getExamById(examId);
         if (exam == null) {
+            model.addAttribute("errorMessage", "Invalid Exam ID");
             return "errorPage"; // Handle invalid exam
         }
 
@@ -163,17 +159,14 @@ public class ExamController {
         for (Question question : questionSet) {
             String submittedAnswer = answers.get(question.getQuestionId());
 
-            System.out.println("QID: " + question.getQuestionId() + ", Correct: " + question.getAnswer() + ", Given: " + submittedAnswer);
-
             if (submittedAnswer != null && submittedAnswer.trim().equals(String.valueOf(question.getAnswer()).trim())) {
                 score++;
             }
         }
 
-        Result resultCheck = resultService.getPublishedDetail(examId);
-        boolean pub = false;
-        if (resultCheck != null)
-            pub = resultCheck.getPublished();
+        boolean pub = Optional.ofNullable(resultService.getPublishedDetail(examId))
+                .map(Result::getPublished)
+                .orElse(false);
 
         // Save result
         Result result = new Result(

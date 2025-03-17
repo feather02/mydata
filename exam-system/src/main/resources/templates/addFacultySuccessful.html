@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Faculty added</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<p>Faculty Added successfully</p>
-<br>
-<button><a th:href="@{/add/faculty}">Add More Faculty</a></button>
-<button><a th:href="@{/adminDashboard}">Go to Dashboard</a></button>
-<button><a th:href="@{/}">Go to Home</a></button>
+<p></p>
+
+<div id="outer2">
+    <p id="success-text">Faculty Added successfully!!</p>
+    <br>
+    <button id="big"><a th:href="@{/add/faculty}">Add More Faculty</a></button>
+    <button id="big"><a th:href="@{/adminDashboard}">Go to Dashboard</a></button>
+    <button id="big"><a th:href="@{/}">Go to Home</a></button>
+  </div>
 </body>
 </html>

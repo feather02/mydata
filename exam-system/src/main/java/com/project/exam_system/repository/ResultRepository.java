@@ -18,7 +18,8 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM result WHERE student_roll_no =?1 AND published = true")
     List<Result> findByStudentRollNo(String studentRollNo);
 
-    @Query("SELECT r FROM Result r WHERE r.examId = ?1")
+    @Query(nativeQuery = true, value = "SELECT * FROM result WHERE exam_id = ?1 LIMIT 1")
     Result getPublishedById(int examId);
+
 
 }

@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Exam System</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
     <h1>EXAM SYSTEM</h1>
-    <button><a th:href="@{/student/register}">Student Registration</a></button>
+    <div id="align-btns">
+        <button><a th:href="@{/student/register}">Student Registration</a></button>
     <button><a th:href="@{/student/login}">Student Login</a></button>
     <button><a th:href="@{/faculty/login}">Faculty Login</a></button>
     <button><a th:href="@{/admin/login}">Admin Login</a></button>
+    </div>
 </body>
 </html>

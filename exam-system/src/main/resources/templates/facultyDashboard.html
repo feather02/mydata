@@ -3,47 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <h2>Faculty Dashboard</h2>
-<table>
-    <thead>
-    <tr>
-        <th>Exam No</th>
-        <th>Exam Name</th>
-        <th>Status</th>
-        <th>Result</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="exam : ${exams}">
-        <td th:text="${exam.examId}"></td>
-        <td th:text="${exam.examName}"></td>
-        <td>
-            <a th:if="${exam.status}"
-               th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty != null ? session.loggedFaculty.username : ''})}"
-               style="margin-left: 0px;"
-               class="status-btn">ON</a>
+<div id="total-flex" >
+    <div id="aside1">
+        <table id="table">
+            <thead>
+            <tr>
+                <th>Exam No</th>
+                <th>Exam Name</th>
+                <th>Status</th>
+                <th>Result</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="tr" th:each="exam : ${exams}">
+                <td th:text="${exam.examId}"></td>
+                <td th:text="${exam.examName}"></td>
+                <td>
+                    <a th:if="${exam.status}"
+                       th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty != null ? session.loggedFaculty.username : ''})}"
+                       style="margin-left: 0px;"
+                       class="status-btn" id="green-btn">ON</a>
+        
+                    <a th:unless="${exam.status}"
+                       th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty.username})}"
+                       style="margin-left: 0px;"
+                       class="status-btn" id="red-btn">OFF</a>
+                </td>
+                <td>
+                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and resultMap[exam.examId][0].published}"
+                       th:href="@{/publish(examId=${exam.examId})}" class="pub" id="red-btn">UNPUBLISH</a>
+        
+                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and !resultMap[exam.examId][0].published}"
+                       th:href="@{/publish(examId=${exam.examId})}" class="unpub" id="green-btn">PUBLISH</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="aside2">
+        <a th:href="@{/create}" id="green-btn">Create Exam</a>
+        <br><br>
+        <a id="red-btn">Logout</a>
 
-            <a th:unless="${exam.status}"
-               th:href="@{/changeStatus(id=${exam.examId}, username=${session.loggedFaculty.username})}"
-               style="margin-left: 0px;"
-               class="status-btn">OFF</a>
-        </td>
-        <td>
-            <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and resultMap[exam.examId][0].published}"
-               th:href="@{/publish(examId=${exam.examId})}" class="pub">UNPUBLISH</a>
+        <div id="logout-faculty" style="display: none;z-index: 100;">
+            <p>Are you sure to Logout?</p>
+            <button id="first-btn"><a   th:href="@{/faculty/logout}">SURE</a></button>
+            <button id="cancel-pop">CANCEL</button>
+        </div>
+    </div>
+</div>
 
-            <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and !resultMap[exam.examId][0].published}"
-               th:href="@{/publish(examId=${exam.examId})}" class="unpub">PUBLISH</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<button><a th:href="@{/create}">Create Exam</a></button>
-<br><br>
-<button><a th:href="@{/faculty/logout}">Logout</a></button>
+<script>
+    logout = document.querySelector("#aside2 #red-btn")
+    log_pop = document.getElementById("logout-faculty");
+    logout.addEventListener("click", () => {
+        log_pop.style.display = "block";
+    });
 
+    cancel_pop = document.getElementById("cancel-pop");
+    cancel_pop.addEventListener("click", () => {
+        log_pop.style.display = "none";
+    }); 
+</script>
 
 </body>
 </html>

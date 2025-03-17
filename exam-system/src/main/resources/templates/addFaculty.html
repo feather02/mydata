@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Faculty</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
   <script>
     window.onload = function() {
       var successMessage = document.getElementById("successMessage");
@@ -26,10 +28,11 @@
       <br>
       <label for="password">Password : </label>
       <input type="password" th:field="*{password}" name="password" id="password" required> <br><br>
-      <button type="submit">SUBMIT</button>
+      <button type="submit" style="margin-left: 70px;">SUBMIT</button>
     </form>
-  </div>
-</div>
+  </div><br>
   <button><a th:href="@{/goToAdminDashboard}">Go Back</a></button>
+</div>
+  
 </body>
 </html>

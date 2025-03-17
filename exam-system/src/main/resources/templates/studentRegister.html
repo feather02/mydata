@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Registration</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <script>
         window.onload = function() {
           var successMessage = document.getElementById("successMessage");
@@ -23,14 +25,18 @@
         <p th:if="${error}" th:text="${error}" style="color: red;"></p>
         <p th:if="${success}" th:text="${success}" id="successMessage" style="color: green; display: none;"></p>
         <form th:action="@{/student/register}" th:object="${student}" method="post">
-            <label for="studentName">Student Name : </label>
-            <input type="text" th:field="*{studentName}" name="studentName" id="studentName" required> <br>
-            <br>
-            <label for="rollNo">RollNo : </label>
-            <input type="number" min="1000" max="9999" th:field="*{rollNo}" name="rollNo" id="rollNo" required> <br>
-            <br>
-            <label for="department">Department : </label>
-            <select th:field="*{department}" name="department" id="department" required>
+          <table>
+            <tr>
+              <td><label for="studentName">Student Name : </label></td>
+              <td><input type="text" th:field="*{studentName}" name="studentName" id="studentName" required></td>
+            </tr>
+            <tr>
+              <td><label for="rollNo">RollNo : </label></td>
+              <td><input type="number" min="1000" max="9999" th:field="*{rollNo}" name="rollNo" id="rollNo" required></td>
+            </tr>
+            <tr>
+              <td><label for="department">Department : </label></td>
+              <td><select th:field="*{department}" name="department" id="department" required>
                 <option value="">Select Department</option>
                 <option value="IT">IT</option>
                 <option value="CSE">CSE</option>
@@ -38,20 +44,27 @@
                 <option value="ECE">ECE</option>
                 <option value="EEE">EEE</option>
                 <option value="CIVIL">CIVIL</option>
-            </select> <br>
-            <br>
-            <label for="year">Year : </label>
-            <select th:field="*{year}" name="year" id="year" required>
-              <option value="">Select Year</option>
-              <option value="1">First Year</option>
-              <option value="2">Second Year</option>
-              <option value="3">Third Year</option>
-              <option value="4">Final Year</option>
-            </select><br>
-            <br>
-            <label for="password">Password : </label>
-            <input type="password" th:field="*{password}" name="password" id="password" required> <br><br>
-            <button type="submit">SUBMIT</button>
+            </select></td>
+            </tr>
+            <tr>
+              <td><label for="year">Year : </label></td>
+              <td><select th:field="*{year}" name="year" id="year" required>
+                <option value="">Select Year</option>
+                <option value="1">First Year</option>
+                <option value="2">Second Year</option>
+                <option value="3">Third Year</option>
+                <option value="4">Final Year</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td><label for="password">Password : </label></td>
+              <td><input type="password" th:field="*{password}" name="password" id="password" required></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><button type="submit">SUBMIT</button></td>
+            </tr>
+          </table>
         </form>
     </div>
 </div>

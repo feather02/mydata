@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration Done</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-  <p>You're registered successfully</p>
+  <div id="outer2">
+    <p id="success-text">You're registered successfully!!!</p>
   <br>
-  <button><a th:href="@{/student/login}">Go to Login</a></button>
-  <button><a th:href="@{/}">Go to Home</a></button>
+  <button id="big"><a th:href="@{/student/login}">Go to Login</a></button>
+  <button id="big"><a th:href="@{/}">Go to Home</a></button>
+  </div>
 </body>
 </html>

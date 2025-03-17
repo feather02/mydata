@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h2>Admin Dashboard</h2>
-    <button><a th:href="@{/add/faculty}">ADD FACULTY</a></button>
-    <button><a th:href="@{/admin/logout}">LOG OUT</a></button>
+    <div id="outer5">
+        <br>
+    <p id="success-text"><h2>Admin Dashboard</h2></p>  <br><br>          
+    <button id="big"><a th:href="@{/add/faculty}">ADD FACULTY</a></button> <br><br>
+    <button id="big"><a th:href="@{/admin/logout}">LOG OUT</a></button>
+    </div>
 </body>
 </html>

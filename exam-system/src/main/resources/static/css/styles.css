@@ -1,0 +1,506 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px 0px;
+    background-color: #AD7858;
+}
+
+h2 {
+    text-transform: uppercase; 
+    text-align: center;
+    padding: 30px 0px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+table, tr, td, th {
+    border-spacing: 20px;
+}
+
+#align-btns {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    height: 87.7vh;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-countdown-to-the-college-entrance-examination-image_790187.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+input, select {
+    width: 150px;
+    height: 20px;
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#align-btns > button {
+    width: 180px;
+    height: 30px;
+    background-color: #c48764;
+    border: 2px solid saddlebrown;
+    font-weight: 600;
+}
+
+#align-btns > button:hover {
+    background-color: #e5a983;
+    box-shadow: 2px 2px 2px #edbb9d;
+}
+
+#outer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://images.blocksurvey.io/cdn-cgi/imagedelivery/G6cPOuGZ4Z_bEV13gBxixw/template-category/event-experience.svg/l");
+    background-repeat: no-repeat;
+    /* background-size: 100% 100%; */
+}
+
+#card {
+    border: 2px solid black;
+    border-radius: 50px;
+    padding: 50px;
+    background-color: rgb(196, 238, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button  {
+    background-color: blue;
+    padding: 7px 15px;
+    color: #fff;
+    font-weight: 700px;
+    border-radius: 5px;
+    border: none;
+}
+
+button > a {
+    color: #fff;
+    font-weight: 700px;
+}
+
+
+button:hover {
+    background-color: rgb(0, 128, 255);
+}
+
+#success {
+    background-image: none;
+}
+
+#outer2 {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#success-text {
+    font-size: 50px;
+}
+
+#big {
+    padding: 20px 50px;
+    width: 250px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+#outer3 {
+    background-image: url("https://t4.ftcdn.net/jpg/05/51/29/09/360_F_551290988_DyKcXvDWiOBzgGydLR65klXwEJhtNGZ0.jpg");
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#outer3 #card {
+    background-color: #D2F0F8;
+}
+
+.left-td {
+    text-align: right;
+}
+
+#stu-dash {
+    background-color: blue;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+#stu-side1 {
+    /* border: 1px solid black; */
+    position: absolute;
+    height: 86vh;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    background-color: rgb(75, 120, 255);
+}
+
+#stu-side1 button {
+    border: none;
+    border-radius: 0px;
+    background-color: rgb(3, 45, 171);
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+#stu-side1 button:hover {
+    background-color: blue;
+}
+
+#stu_profile {
+    background-color: blue;
+}
+
+#profile_section,#exam_section, #result_section, #error-p {
+    margin-top: 30px;
+    margin-left: 250px;
+}
+
+th {
+    text-align: right;
+}
+
+#profile_section table, #profile_section td, #profile_section th {
+    border: none;
+}
+
+#profile_section tr {
+    background-color: white;
+}
+
+#table, #table td, #table th {
+    border: 1px solid #fff;
+    border-collapse: collapse;
+    padding: 15px;
+}
+
+#table td {
+    text-align: center;
+}
+
+#table tr {
+    background-color: #D0E8FF; /* Light Blue */
+}
+
+#table #tr {
+    background-color: #D0E8FF; /* Light Blue */
+}
+
+#table tr:first-child {
+    background-color: #A3D5FF; /* Medium Blue */
+}
+
+#green-btn  {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: white;
+    background-color: rgb(26, 187, 26);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: sans-serif;
+}
+
+#green-btn:hover {
+    background-color: green;
+}
+
+#red-btn {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: white;
+    background-color: rgb(252, 20, 20);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-family: sans-serif;
+}
+
+#red-btn:hover {
+    background-color: rgb(187, 0, 0);
+}
+
+#logout-popup {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 300px;
+    height: 120px;
+    margin-left: 400px;
+    text-align: center;
+    background-color: aqua;
+    animation-name: logout-popup;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    display: none;
+}
+
+#logout-popup #first-btn, #logout-popup  p {
+    margin: 20px;
+    margin-bottom: 0px;
+}
+
+
+@keyframes logout-popup {
+    from {
+        transform: translateY(-1000px);
+    } 
+    to {
+        transform: translateY(0px);
+    }
+
+}
+
+#total-flex {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
+
+#aside1, #aside2 {
+    margin-left: 100px;
+}
+
+
+#logout-faculty {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 200px;
+    height: 120px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: aqua;
+    animation-name: logout-popup;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    display: none;
+}
+
+#logout-faculty #first-btn, #logout-faculty p {
+    margin: 7px;
+    margin-top: 15px;
+    /* margin-bottom: 0px; */
+}
+
+#outer4 #card {
+    height: 77vh;
+    margin: 20px;
+    background-color: rgb(255, 241, 160);
+}
+/* 
+span {
+    font-weight: 700;
+    text-transform: uppercase;
+} */
+
+#space-apply {
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#space-apply span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #004085;
+}
+
+#space-apply h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0056b3;
+    margin-bottom: 8px;
+}
+
+#space-apply p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    background-color: #e3f2fd;
+    padding: 10px;
+    border-left: 5px solid #007BFF;
+    border-radius: 5px;
+}
+
+#space-apply .option {
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+#space-apply input[type="radio"] {
+    margin: 0px;
+    padding: 0px;
+    width: 30px;
+}
+
+#space-apply p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    font-style: italic;
+    margin: 10px 0px 0px 0px;
+    padding: 10px 10px 0px 10px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    background-color: #f0f8ff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#space-apply input {
+    padding: 0px 0px 0px 0px;
+}
+
+#space-apply table {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+#outer5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("https://img.freepik.com/premium-vector/modern-abstract-geometric-blue-white-background_907220-2068.jpg");
+    height: 100vh;
+    background-size: cover;
+}
+
+/* Style the outer container */
+#outer6 {
+    width: 70%;
+    margin: auto;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Center and space form elements properly */
+#outer6 form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Question Header */
+#outer6 h3 {
+    font-size: 22px;
+    color: #0056b3;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Table Styling */
+#outer6 table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Align table cells properly */
+#outer6 table tr {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Left Column - Labels */
+#outer6 table td:first-child {
+    width: 150px;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+}
+
+/* Separator */
+#outer6 table td:nth-child(2) {
+    width: 20px;
+    text-align: center;
+}
+
+/* Input Fields */
+#outer6 input[type="text"], 
+#outer6 textarea {
+    flex-grow: 1;
+    width: calc(100% - 180px);
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#outer6 select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Reduce Option Box Size */
+#outer6 input[type="text"] {
+    width: 80%;
+}
+
+/* Reduce Select Box Width */
+#outer6 select {
+    width: 100%;
+    color: #000;
+}
+
+/* Style Submit Button */
+#outer6 button {
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+#outer6 button:hover {
+    background: #0056b3;
+}
+
+/* Style Separators */
+#outer6 hr {
+    border: 0;
+    height: 2px;
+    background: #007bff;
+    width: 100%;
+    margin: 20px 0;
+}
+

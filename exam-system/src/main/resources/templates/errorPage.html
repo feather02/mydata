@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Error Page</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-  <h2>Error</h2>
-  <p th:text="${errorMessage}"></p>
+  <div id="outer2">
+    <h2 id="success-text">Error</h2>
+    <p th:text="${errorMessage}"></p>
+    <button id="big"><a th:href="@{/}">Go to Home Page</a></button>
+</div>
 </body>
 </html>

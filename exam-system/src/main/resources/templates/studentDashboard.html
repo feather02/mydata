@@ -3,42 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h2>Student Dashboard</h2>
-<button id="stu_profile">Student Profile</button>
+<h2 id="stu-dash">Student Dashboard</h2>
+<div id="stu-side1">
+    <button id="stu_profile">Student Profile</button>
 <button id="attend_exam">Attend Exam</button>
 <button id="view_result">View Result</button>
-<button id="view_result"><a th:href="@{/student/logout}">Logout</a></button>
+<button id="logout"><a>Logout</a></button>
+</div>
+
+<!-- If student data is missing, show an error message -->
+<div th:if="${student == null}">
+    <p style="color: red;" id="error-p">Error: Student details not found. Please log in again.</p>
+</div>
 
 <div id="profile_section" th:if="${student != null}">
     <table>
         <tr>
             <th>Student Name</th>
+            <th> : </th>
             <td th:text="${student.studentName} ?: 'N/A'"></td>
         </tr>
         <tr>
             <th>Roll No</th>
+            <th> : </th>
             <td th:text="${student.rollNo} ?: 'N/A'"></td>
         </tr>
         <tr>
             <th>Department</th>
+            <th> : </th>
             <td th:text="${student.department} ?: 'N/A'"></td>
         </tr>
         <tr>
             <th>Year</th>
+            <th> : </th>
             <td th:text="${student.year} ?: 'N/A'"></td>
         </tr>
     </table>
 </div>
 
-<!-- If student data is missing, show an error message -->
-<div th:if="${student == null}">
-    <p style="color: red;">Error: Student details not found. Please log in again.</p>
-</div>
-
 <div id="exam_section" style="display: none;">
-    <table>
+    <table id="table">
         <tr>
             <th>Exam No</th>
             <th>Exam Name</th>
@@ -51,33 +59,36 @@
                 <td th:text="${exam.examName}"></td>
                 <td th:text="${exam.faculty.username}"></td>
                 <td>
-                    <a th:href="@{/attendExam/{examId}(examId=${exam.examId})}">Attend</a>
+                    <a th:href="@{/attendExam/{examId}(examId=${exam.examId})}" id="green-btn">Attend</a>
                 </td>
             </tr>
         </div>
     </table>
 </div>
-<br><br>
+
 <!-- Create result section -->
 
 <div id="result_section" style="display: none;">
-    <table>
-        <thead>
+    <table id="table">
         <tr>
             <th>Exam No</th>
             <th>Exam Name</th>
             <th>Marks Gained</th>
         </tr>
-        </thead>
-        <tbody>
         <tr th:each="result : ${result}">
             <td th:text="${result.examId}"></td>
             <td th:text="${result.examName}"></td>
             <td th:text="${result.marks} + '/' + ${result.noOfQuestions} "></td>
         </tr>
-        </tbody>
     </table>
 </div>
+
+<div id="logout-popup">
+    <p>Are you sure to Logout?</p>
+    <button id="first-btn"><a   th:href="@{/student/logout}">SURE</a></button>
+    <button id="cancel-pop">CANCEL</button>
+</div>
+
 <script>
     profile = document.getElementById("stu_profile");
     exam = document.getElementById("attend_exam");
@@ -104,7 +115,17 @@
         exam_section.style.display = "none";
         result_section.style.display = "block";
     });
-</script>
 
+    logout = document.getElementById("logout");
+    log_pop = document.getElementById("logout-popup");
+    logout.addEventListener("click", () => {
+        log_pop.style.display = "block";
+    });
+
+    cancel_pop = document.getElementById("cancel-pop");
+    cancel_pop.addEventListener("click", () => {
+        log_pop.style.display = "none";
+    }); 
+</script>
 </body>
 </html>

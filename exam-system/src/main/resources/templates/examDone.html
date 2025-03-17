@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Exam Done</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h2>Exam Submitted Successfully</h2>
-    <a th:href="@{/studentDashboard}">Go to Dashboard</a>
+    <div id="outer2">
+        <h2 id="success-text">Exam Submitted Successfully!!!</h2>
+        <button id="big"><a th:href="@{/studentDashboard}">Go to Dashboard</a></button>
+    </div>
 </body>
 </html>
