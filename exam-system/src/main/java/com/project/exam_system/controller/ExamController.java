@@ -3,6 +3,7 @@ package com.project.exam_system.controller;
 import com.project.exam_system.dto.ExamSubmissionDTO;
 import com.project.exam_system.dto.QuestionForm;
 import com.project.exam_system.entity.*;
+import com.project.exam_system.repository.SubmittedAnswerRepository;
 import com.project.exam_system.service.ExamService;
 import com.project.exam_system.service.QuestionService;
 import com.project.exam_system.service.ResultService;
@@ -27,6 +28,9 @@ public class ExamController {
 
     @Autowired
     private ResultService resultService;
+
+    @Autowired
+    private SubmittedAnswerRepository submittedAnswerRepository;
 
     @GetMapping("/create")
     public ModelAndView createExamPage() {
@@ -155,17 +159,37 @@ public class ExamController {
         int totalQuestions = questionSet.size();
         int score = 0;
 
-        // Compare answers
-        for (Question question : questionSet) {
-            String submittedAnswer = answers.get(question.getQuestionId());
+        List<SubmittedAnswer> submittedAnswers = new ArrayList<>();
 
-            if (submittedAnswer != null && submittedAnswer.trim().equals(String.valueOf(question.getAnswer()).trim())) {
+        for (Question question : questionSet) {
+            String submittedAnswerStr = answers.get(question.getQuestionId());
+            int submittedAnswer = (submittedAnswerStr != null) ? Integer.parseInt(submittedAnswerStr) : -1;
+
+            if (submittedAnswer == question.getAnswer()) {
                 score++;
             }
+
+            // Save submitted answer to the database
+            SubmittedAnswer sa = new SubmittedAnswer(
+                    String.valueOf(student.getRollNo()),
+                    examId,
+                    question.getQuestionNumber(),
+                    question.getAnswer(),
+                    submittedAnswer,
+                    question
+            );
+            submittedAnswers.add(sa);
         }
 
-        boolean pub = Optional.ofNullable(resultService.getPublishedDetail(examId))
-                .map(Result::getPublished)
+        // Save all submitted answers in batch
+        submittedAnswerRepository.saveAll(submittedAnswers);
+
+        boolean pub = Optional.ofNullable(resultService.getPublishMarksDetail(examId))
+                .map(Result::getPublishMarks)
+                .orElse(false);
+
+        boolean pubAnswers = Optional.ofNullable(resultService.getPublishMarksDetail(examId))
+                .map(Result::getPublishAnswers)
                 .orElse(false);
 
         // Save result
@@ -176,14 +200,14 @@ public class ExamController {
                 student.getRollNo(),
                 totalQuestions,
                 score,
-                pub
+                pub,
+                pubAnswers
         );
         resultService.saveResult(result);
 
         model.addAttribute("message", "Exam Submitted Successfully!");
         return "examDone"; // Page to show result
     }
-
 
 }
 

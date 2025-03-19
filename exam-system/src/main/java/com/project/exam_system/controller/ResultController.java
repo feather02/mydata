@@ -19,5 +19,9 @@ public class ResultController {
         return "redirect:/facultyDashboard";
     }
 
-
+    @GetMapping("/publishAnswers")
+    public String publishAnswers(@RequestParam("examId") int examId) {
+        resultService.publishAnswers(examId);
+        return "redirect:/facultyDashboard";
+    }
 }

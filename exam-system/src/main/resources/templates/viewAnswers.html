@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Answers</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div id="print">
+        <h3 th:text="'Exam ID : ' + ${questions[0].exam.examId}"></h3>
+        <h3 th:text="'Exam Name : ' + ${questions[0].exam.examName}"></h3>
+        <h3 th:text="'Marks : ' + ${result.marks} + '/' + ${result.noOfQuestions} "></h3>
+        <h3 th:text="'Student RollNo : ' + ${result.studentRollNo} "></h3>
+        <h3 th:text="'Student Name : ' + ${result.studentName} "></h3>
+        <table>
+            <div id="questions-list" th:each="qn : ${questions}">
+                <tr>
+                    <td th:text="${qn.questionNumber} + ' . ' + ${qn.question}"></td>
+                    <div id="submitted-list" th:each="sa : ${submittedAnswers}">
+                        <div id="inside-list" th:if="${sa.questionNumber} == ${qn.questionNumber}">
+                            <td th:if="${sa.submittedAnswer} == ${sa.correctAnswer}" th:text="1+'/'+1"></td>
+                            <td th:if="${sa.submittedAnswer} != ${sa.correctAnswer}" th:text="0+'/'+1"></td>
+                        </div>
+                    </div>
+                </tr>
+                <tr>
+                    <div id="submitted-list" th:each="sa : ${submittedAnswers}">
+                        <div id="inside-list" th:if="${sa.questionNumber} == ${qn.questionNumber}">
+                            <td th:if="${sa.submittedAnswer} == 1" th:text="'Your Answer : ' + ${qn.option1}"></td>
+                            <td th:if="${sa.submittedAnswer} == 2" th:text="'Your Answer : ' + ${qn.option2}"></td>
+                            <td th:if="${sa.submittedAnswer} == 3" th:text="'Your Answer : ' + ${qn.option3}"></td>
+                            <td th:if="${sa.submittedAnswer} == 4" th:text="'Your Answer : ' + ${qn.option4}"></td>
+                        </div>
+                    </div>
+                </tr>
+                <tr>
+                    <td th:if="${qn.answer} == 1" th:text="'Correct Answer : ' + ${qn.option1}"></td>
+                    <td th:if="${qn.answer} == 2" th:text="'Correct Answer : ' + ${qn.option2}"></td>
+                    <td th:if="${qn.answer} == 3" th:text="'Correct Answer : ' + ${qn.option3}"></td>
+                    <td th:if="${qn.answer} == 4" th:text="'Correct Answer : ' + ${qn.option4}"></td>
+                </tr>
+            </div>
+        </table>
+        <button onclick="window.print()">Print</button>
+    </div>
+</body>
+</html>

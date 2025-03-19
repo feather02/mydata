@@ -16,7 +16,8 @@
                 <th>Exam No</th>
                 <th>Exam Name</th>
                 <th>Status</th>
-                <th>Result</th>
+                <th>Marks</th>
+                <th>Answers</th>
             </tr>
             </thead>
             <tbody>
@@ -35,11 +36,18 @@
                        class="status-btn" id="red-btn">OFF</a>
                 </td>
                 <td>
-                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and resultMap[exam.examId][0].published}"
+                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and resultMap[exam.examId][0].publishMarks}"
                        th:href="@{/publish(examId=${exam.examId})}" class="pub" id="red-btn">UNPUBLISH</a>
         
-                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and !resultMap[exam.examId][0].published}"
+                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and !resultMap[exam.examId][0].publishMarks}"
                        th:href="@{/publish(examId=${exam.examId})}" class="unpub" id="green-btn">PUBLISH</a>
+                </td>
+                <td>
+                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and resultMap[exam.examId][0].publishAnswers}"
+                       th:href="@{/publishAnswers(examId=${exam.examId})}" class="pub" id="red-btn">UNPUBLISH</a>
+
+                    <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and !resultMap[exam.examId][0].publishAnswers}"
+                       th:href="@{/publishAnswers(examId=${exam.examId})}" class="unpub" id="green-btn">PUBLISH</a>
                 </td>
             </tr>
             </tbody>
@@ -68,7 +76,7 @@
     cancel_pop = document.getElementById("cancel-pop");
     cancel_pop.addEventListener("click", () => {
         log_pop.style.display = "none";
-    }); 
+    });
 </script>
 
 </body>

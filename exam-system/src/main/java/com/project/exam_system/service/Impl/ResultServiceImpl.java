@@ -33,11 +33,11 @@ public class ResultServiceImpl implements ResultService {
                 List<Result> results = resultRepository.findByExamId(examId);
 
                 if (!results.isEmpty()) {
-                        boolean currentStatus = results.get(0).getPublished(); // Check current status
+                        boolean currentStatus = results.get(0).getPublishMarks(); // Check current status
                         boolean newStatus = !currentStatus; // Toggle the status
 
                         for (Result result : results) {
-                                result.setPublished(newStatus);
+                                result.setPublishMarks(newStatus);
                         }
                         resultRepository.saveAll(results);
                 }
@@ -54,7 +54,26 @@ public class ResultServiceImpl implements ResultService {
         }
 
         @Override
-        public Result getPublishedDetail(int examId) {
+        public Result getPublishMarksDetail(int examId) {
                 return resultRepository.getPublishedById(examId);
+        }
+
+        @Override
+        public void publishAnswers(int examId) {
+                List<Result> results = resultRepository.findByExamId(examId);
+                if (!results.isEmpty()) {
+                        boolean currentStatus = results.get(0).getPublishAnswers();
+                        boolean newStatus = !currentStatus;
+
+                        for (Result res: results) {
+                                res.setPublishAnswers(newStatus);
+                        }
+                        resultRepository.saveAll(results);
+                }
+        }
+
+        @Override
+        public Result getResultByRollNoAndExamId(int examId, String rollNo) {
+                return resultRepository.findByStudentRollNoAndExamId(rollNo,examId);
         }
 }

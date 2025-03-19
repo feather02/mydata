@@ -1,9 +1,9 @@
 package com.project.exam_system.controller;
 
-import com.project.exam_system.entity.Exam;
-import com.project.exam_system.entity.Result;
-import com.project.exam_system.entity.Student;
+import com.project.exam_system.entity.*;
+import com.project.exam_system.repository.SubmittedAnswerRepository;
 import com.project.exam_system.service.ExamService;
+import com.project.exam_system.service.QuestionService;
 import com.project.exam_system.service.ResultService;
 import com.project.exam_system.service.StudentService;
 import jakarta.servlet.http.HttpSession;
@@ -27,6 +27,12 @@ public class StudentController {
 
     @Autowired
     private ResultService resultService;
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Autowired
+    private SubmittedAnswerRepository submittedAnswerRepository;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -93,5 +99,18 @@ public class StudentController {
         session.invalidate();
         return "redirect:/";
 
+    }
+
+    @GetMapping("/viewAnswers")
+    public String viewAnswers(@RequestParam("id") int examId, @RequestParam("rollNo") String rollNo, Model model) {
+        Result result = resultService.getResultByRollNoAndExamId(examId,rollNo);
+        List<SubmittedAnswer> submittedAnswer = submittedAnswerRepository.findByExamIdAndRollNo(examId,rollNo);
+        if (result != null) {
+            List<Question> questionList = questionService.getQuestionsByExamId(examId);
+            model.addAttribute("result",result);
+            model.addAttribute("submittedAnswers",submittedAnswer);
+            model.addAttribute("questions", questionList);
+        }
+        return "viewAnswers";
     }
 }

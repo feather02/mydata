@@ -16,5 +16,9 @@ public interface ResultService {
 
     List<Result> getResultById(String studentRollNo);
 
-    Result getPublishedDetail(int examId);
+    Result getPublishMarksDetail(int examId);
+
+    void publishAnswers(int examId);
+
+    Result getResultByRollNoAndExamId(int examId, String rollNo);
 }

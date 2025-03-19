@@ -23,15 +23,17 @@ public class Result {
     private String studentRollNo;
     private int noOfQuestions;
     private int marks;
-    private Boolean published;
+    private Boolean publishMarks;
+    private Boolean publishAnswers;
 
-    public Result(int examId, String examName, String studentName, Integer rollNo, int totalQuestions, int score, Boolean published) {
+    public Result(int examId, String examName, String studentName, Integer rollNo, int totalQuestions, int score, Boolean publishMarks, Boolean publishAnswers) {
         this.examId = examId;
         this.examName = examName;
         this.studentName = studentName;
         this.studentRollNo = rollNo.toString();
         this.noOfQuestions = totalQuestions;
         this.marks = score;
-        this.published = published;
+        this.publishMarks = publishMarks;
+        this.publishAnswers = publishAnswers;
     }
 }

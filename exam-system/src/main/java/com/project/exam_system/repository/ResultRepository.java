@@ -10,16 +10,17 @@ import java.util.List;
 
 @Repository
 public interface ResultRepository extends JpaRepository<Result, Long> {
+
     @Query("SELECT r FROM Result r WHERE r.examId = :examId AND r.studentRollNo = :rollNo")
     List<Result> findByExamIdAndRollNo(@Param("examId") int examId, @Param("rollNo") Integer rollNo);
 
     List<Result> findByExamId(int examId);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM result WHERE student_roll_no =?1 AND published = true")
+    @Query(nativeQuery = true, value = "SELECT * FROM result WHERE student_roll_no =?1 AND publish_marks = true")
     List<Result> findByStudentRollNo(String studentRollNo);
 
     @Query(nativeQuery = true, value = "SELECT * FROM result WHERE exam_id = ?1 LIMIT 1")
     Result getPublishedById(int examId);
 
-
+    Result findByStudentRollNoAndExamId(String studentRollNo, int examId);
 }

@@ -26,4 +26,10 @@ class ResultRepositoryTest {
         List<Result> res = resultRepository.findByStudentRollNo("1111");
         System.out.println(res);
     }
+
+    @Test
+    public void getResultByRollNoAndExamId() {
+        Result result = resultRepository.findByStudentRollNoAndExamId("1001",1);
+        System.out.println(result);
+    }
 }

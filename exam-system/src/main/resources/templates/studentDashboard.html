@@ -74,11 +74,16 @@
             <th>Exam No</th>
             <th>Exam Name</th>
             <th>Marks Gained</th>
+            <th>View Answers</th>
         </tr>
         <tr th:each="result : ${result}">
             <td th:text="${result.examId}"></td>
             <td th:text="${result.examName}"></td>
             <td th:text="${result.marks} + '/' + ${result.noOfQuestions} "></td>
+            <td>
+                <a th:if="${result.publishAnswers}" th:href="@{/viewAnswers(rollNo=${result.studentRollNo}, id=${result.examId})}" id="green-btn">VIEW</a>
+                <span th:unless="${result.publishAnswers}">N/A</span>
+            </td>
         </tr>
     </table>
 </div>
