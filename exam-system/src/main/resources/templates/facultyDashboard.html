@@ -8,16 +8,34 @@
 </head>
 <body>
 <h2>Faculty Dashboard</h2>
+<div id="aside2">
+    <a th:href="@{/create}" id="green-btn">Create Exam</a>
+    <a id="red-btn">Logout</a>
+
+    <div id="logout-faculty" style="display: none;z-index: 100;">
+        <p>Are you sure to Logout?</p>
+        <button id="first-btn"><a   th:href="@{/faculty/logout}">SURE</a></button>
+        <button id="cancel-pop">CANCEL</button>
+    </div>
+
+    <div id="delete-popup" style="display:none;z-index: 100;">
+        <p>Are you sure to Delete the exam?</p>
+        <button id="first-btn"><a id="delete-link">SURE</a></button>
+        <button id="cancel-delete">CANCEL</button>
+    </div>
+</div>
 <div id="total-flex" >
     <div id="aside1">
         <table id="table">
             <thead>
             <tr>
-                <th>Exam No</th>
-                <th>Exam Name</th>
-                <th>Status</th>
-                <th>Marks</th>
-                <th>Answers</th>
+                <th style="min-width: 70px;">Exam No</th>
+                <th style="min-width: 170px;max-width: 170px;">Exam Name</th>
+                <th style="min-width: 70px;">Status</th>
+                <th style="min-width: 120px;">Marks</th>
+                <th style="min-width: 120px;">Answers</th>
+                <th>Delete</th>
+                <th>Update</th>
             </tr>
             </thead>
             <tbody>
@@ -49,34 +67,57 @@
                     <a th:if="${resultMap[exam.examId] != null and #lists.size(resultMap[exam.examId]) > 0 and !resultMap[exam.examId][0].publishAnswers}"
                        th:href="@{/publishAnswers(examId=${exam.examId})}" class="unpub" id="green-btn">PUBLISH</a>
                 </td>
+                <td>
+                    <a th:onclick="|popup(${exam.examId})|" id="red-btn">DELETE</a>
+                </td>
+                <td>
+                    <a th:href="@{/updateQuestions(examId=${exam.examId})}" id="yellow-btn">UPDATE</a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <div id="aside2">
-        <a th:href="@{/create}" id="green-btn">Create Exam</a>
-        <br><br>
-        <a id="red-btn">Logout</a>
-
-        <div id="logout-faculty" style="display: none;z-index: 100;">
-            <p>Are you sure to Logout?</p>
-            <button id="first-btn"><a   th:href="@{/faculty/logout}">SURE</a></button>
-            <button id="cancel-pop">CANCEL</button>
-        </div>
-    </div>
+   
 </div>
 
 <script>
-    logout = document.querySelector("#aside2 #red-btn")
-    log_pop = document.getElementById("logout-faculty");
-    logout.addEventListener("click", () => {
-        log_pop.style.display = "block";
-    });
 
-    cancel_pop = document.getElementById("cancel-pop");
-    cancel_pop.addEventListener("click", () => {
-        log_pop.style.display = "none";
-    });
+
+    const overlay = document.createElement("div");
+overlay.id = "overlay";
+document.body.appendChild(overlay);
+
+function popup(examId) {
+    let delete_popup = document.getElementById("delete-popup");
+    delete_popup.style.display = "block";
+    overlay.style.display = "block";
+    document.getElementById("delete-link").href = "/exam/delete?examId=" + examId;
+}
+
+document.getElementById("cancel-delete").onclick = function() {
+    document.getElementById("delete-popup").style.display = "none";
+    overlay.style.display = "none";
+};
+
+logout = document.querySelector("#aside2 #red-btn");
+log_pop = document.getElementById("logout-faculty");
+logout.addEventListener("click", () => {
+    log_pop.style.display = "block";
+    overlay.style.display = "block";
+});
+
+cancel_pop = document.getElementById("cancel-pop");
+cancel_pop.addEventListener("click", () => {
+    log_pop.style.display = "none";
+    overlay.style.display = "none";
+});
+
+overlay.onclick = function () {
+    document.getElementById("logout-faculty").style.display = "none";
+    document.getElementById("delete-popup").style.display = "none";
+    overlay.style.display = "none";
+};
+
 </script>
 
 </body>

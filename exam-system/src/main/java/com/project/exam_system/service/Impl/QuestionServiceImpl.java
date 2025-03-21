@@ -30,4 +30,20 @@ public class QuestionServiceImpl implements QuestionService {
         return questionRepository.findByExamId(examId);
     }
 
+    @Override
+    public void updateQuestion(Question question) {
+        int examId=question.getExam().getExamId();
+        int qnNo = question.getQuestionNumber();
+        Question existingQuestion = questionRepository.findByExam_ExamIdAndQuestionNumber(examId,qnNo);
+        if (existingQuestion != null) {
+            existingQuestion.setQuestion(question.getQuestion());
+            existingQuestion.setOption1(question.getOption1());
+            existingQuestion.setOption2(question.getOption2());
+            existingQuestion.setOption3(question.getOption3());
+            existingQuestion.setOption4(question.getOption4());
+            existingQuestion.setAnswer(question.getAnswer());
+        }
+        questionRepository.save(existingQuestion);
+    }
+
 }

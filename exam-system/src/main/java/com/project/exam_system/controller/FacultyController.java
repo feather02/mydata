@@ -68,7 +68,8 @@ public class FacultyController {
             return "redirect:/faculty/login";
         }
 
-        List<Exam> examList = examService.getAllExams();
+        //List<Exam> examList = examService.getAllExams();
+        List<Exam> examList = examService.getAllExamsByFacultyId(faculty.getId());
 
         // Map examId -> List<Result> (to handle multiple students per exam)
         Map<Integer, List<Result>> resultMap = resultService.getAllResults()

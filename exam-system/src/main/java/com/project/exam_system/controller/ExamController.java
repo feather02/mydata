@@ -75,6 +75,41 @@ public class ExamController {
         return "addQuestions";
     }
 
+    @GetMapping("/updateQuestions")
+    public String updateQuestionsPage(HttpSession session, @RequestParam int examId, Model model) {
+        Faculty faculty = (Faculty) session.getAttribute("loggedFaculty");
+        if (faculty == null) {
+            return "redirect:/faculty/login";
+        }
+
+        Exam exam = examService.getExamById(examId);
+        if (exam == null) {
+            return "errorPage";
+        }
+
+        List<Question> existingQuestions = questionService.getQuestionsByExamId(examId);
+
+        if (existingQuestions.isEmpty()) {
+            return "errorPage";
+        }
+
+        QuestionForm questionForm = new QuestionForm();
+        questionForm.setQuestionList(existingQuestions);
+
+        model.addAttribute("questionForm", questionForm);
+        model.addAttribute("existingQuestions", existingQuestions);
+        model.addAttribute("examId", examId);
+
+        return "updateQuestions";
+    }
+
+    @PostMapping("/updateQuestions")
+    public String updateQuestions(@ModelAttribute QuestionForm questionForm) {
+        for (Question question : questionForm.getQuestionList()) {
+            questionService.updateQuestion(question);
+        }
+        return "redirect:/facultyDashboard";
+    }
 
     @PostMapping("/submitQuestions")
     public String addQuestions(@RequestParam int examId, @ModelAttribute("questionForm") QuestionForm questionForm) {
@@ -209,5 +244,10 @@ public class ExamController {
         return "examDone"; // Page to show result
     }
 
+    @GetMapping("/exam/delete")
+    public String deleteExam(@RequestParam("examId") int examId) {
+        examService.deleteExam(examId);
+        return "redirect:/facultyDashboard";
+    }
 }
 

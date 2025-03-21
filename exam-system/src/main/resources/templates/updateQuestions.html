@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Questions</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h2>Update Questions</h2>
+
+<div id="outer6">
+  <form th:action="@{/updateQuestions}" th:object="${questionForm}" method="post">
+    <div th:each="existingQuestion, iterStat : ${existingQuestions}">
+      <input type="hidden" name="examId" th:field="*{questionList[__${iterStat.index}__].exam.examId}">
+      <h3>Question No: <span th:text="${existingQuestion.questionNumber}"></span></h3>
+
+      <!-- Bind fields correctly -->
+      <input type="hidden" th:field="*{questionList[__${iterStat.index}__].questionNumber}">
+
+      <table>
+        <tr>
+          <td><label>Question</label></td>
+          <td>:</td>
+          <td><textarea th:field="*{questionList[__${iterStat.index}__].question}" required cols="70" rows="5"></textarea></td>
+        </tr>
+        <tr>
+          <td><label>Option 1</label></td>
+          <td>:</td>
+          <td><input type="text" th:field="*{questionList[__${iterStat.index}__].option1}" required></td>
+        </tr>
+        <tr>
+          <td><label>Option 2</label></td>
+          <td>:</td>
+          <td><input type="text" th:field="*{questionList[__${iterStat.index}__].option2}" required></td>
+        </tr>
+        <tr>
+          <td><label>Option 3</label></td>
+          <td>:</td>
+          <td><input type="text" th:field="*{questionList[__${iterStat.index}__].option3}" required></td>
+        </tr>
+        <tr>
+          <td><label>Option 4</label></td>
+          <td>:</td>
+          <td><input type="text" th:field="*{questionList[__${iterStat.index}__].option4}" required></td>
+        </tr>
+        <tr>
+          <td><label>Correct Answer</label></td>
+          <td>:</td>
+          <td>
+            <select th:field="*{questionList[__${iterStat.index}__].answer}">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <br><hr><br>
+    </div>
+
+    <button type="submit" style="margin-left: 200px;">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>

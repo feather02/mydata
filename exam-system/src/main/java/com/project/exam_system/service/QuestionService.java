@@ -10,4 +10,6 @@ public interface QuestionService {
     int getNextQuestionNumberForExam(int examId);
 
     List<Question> getQuestionsByExamId(int examId);
+
+    void updateQuestion(Question question);
 }

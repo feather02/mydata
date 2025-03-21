@@ -5,6 +5,7 @@ import com.project.exam_system.repository.ExamRepository;
 import com.project.exam_system.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +33,16 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public void updateStatus(int id, boolean b) {
         examRepository.findById(id).ifPresent(exam -> exam.setStatus(b));
+    }
+
+    @Override
+    public List<Exam> getAllExamsByFacultyId(int id) {
+        return examRepository.findByFacultyId(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteExam(int examId) {
+        examRepository.deleteByExamId(examId);
     }
 }

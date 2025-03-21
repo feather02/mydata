@@ -11,4 +11,8 @@ public interface ExamService {
     List<Exam> getAllExams();
 
     void updateStatus(int id, boolean b);
+
+    List<Exam> getAllExamsByFacultyId(int id);
+
+    void deleteExam(int examId);
 }
