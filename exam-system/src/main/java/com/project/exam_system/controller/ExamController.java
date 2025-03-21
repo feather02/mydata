@@ -42,10 +42,11 @@ public class ExamController {
     @PostMapping("/create")
     public String createExam(@ModelAttribute("exam") Exam exam, HttpSession session, Model model) {
         Faculty faculty = (Faculty) session.getAttribute("loggedFaculty");
+        session.removeAttribute("loggedAdmin");
         if (faculty == null) {
-            return "redirect:/faculty/login"; // Redirect if not logged in
+            return "redirect:/faculty/login";
         }
-        exam.setFaculty(faculty);  // Assign faculty to exam
+        exam.setFaculty(faculty);
         examService.createExam(exam);
         return "redirect:/addQuestions?examId=" + exam.getExamId() + "&noOfQuestions=" + exam.getNoOfQuestions();
     }
@@ -59,7 +60,7 @@ public class ExamController {
 
         Exam exam = examService.getExamById(examId);
         if (exam == null) {
-            return "errorPage";  // Handle invalid exam
+            return "errorPage";
         }
         QuestionForm questionForm = new QuestionForm();
         List<Question> questions = new ArrayList<>();
@@ -115,11 +116,10 @@ public class ExamController {
     public String addQuestions(@RequestParam int examId, @ModelAttribute("questionForm") QuestionForm questionForm) {
         Exam exam = examService.getExamById(examId);
         if (exam == null) {
-            return "errorPage";  // Handle invalid exam
+            return "errorPage";
         }
         for (Question question : questionForm.getQuestionList()) {
-            question.setExam(exam);  // Link question to exam
-            // Ensure questionNumber is set correctly if needed
+            question.setExam(exam);
             if (question.getQuestionNumber() == 0) {
                 int nextQuestionNumber = questionService.getNextQuestionNumberForExam(examId);
                 question.setQuestionNumber(nextQuestionNumber);
@@ -147,7 +147,7 @@ public class ExamController {
         Student student = (Student) session.getAttribute("loggedStudent");
 
         if (student == null) {
-            return "redirect:/student/login"; // Redirect if not logged in
+            return "redirect:/student/login";
         }
 
         Boolean alreadyDone =resultService.getAlreadyDone(examId,student.getRollNo());
@@ -178,7 +178,7 @@ public class ExamController {
 
         Student student = (Student) session.getAttribute("loggedStudent");
         if (student == null) {
-            return "redirect:/student/login"; // Redirect if not logged in
+            return "redirect:/student/login";
         }
 
         int examId = examSubmission.getExamId();
@@ -187,7 +187,7 @@ public class ExamController {
         Exam exam = examService.getExamById(examId);
         if (exam == null) {
             model.addAttribute("errorMessage", "Invalid Exam ID");
-            return "errorPage"; // Handle invalid exam
+            return "errorPage";
         }
 
         List<Question> questionSet = questionService.getQuestionsByExamId(examId);
@@ -241,7 +241,7 @@ public class ExamController {
         resultService.saveResult(result);
 
         model.addAttribute("message", "Exam Submitted Successfully!");
-        return "examDone"; // Page to show result
+        return "examDone";
     }
 
     @GetMapping("/exam/delete")

@@ -24,7 +24,8 @@ public class AdminController {
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/")
-    public String home() {
+    public String home(HttpSession session) {
+        session.invalidate();
         return "index";
     }
 
@@ -50,6 +51,7 @@ public class AdminController {
     @GetMapping("/adminDashboard")
     public String adminDashboardPage(HttpSession session) {
         Admin admin = (Admin) session.getAttribute("loggedAdmin");
+        session.removeAttribute("loggedFaculty");
         if (admin ==null) {
             return "redirect:/admin/login";
         }

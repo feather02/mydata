@@ -23,6 +23,22 @@ Spring Data JPA - Intro , REST API's, Relationships
 2. DTO pattern
 3. Exception Handling
 
+17/03/2025
+1. git basics
+2. git init , add , commit
+3. git branch, diff, tag, merge, revert, rebase
+4.. git push , pull, fetch
+
+18/03/2025
+1. Github
+2. HTTP - PAT usage
+3. SSH Key Generation
+4. Fork, Collaborators
+
+21/03/2025
+1. Front End Connectivity  - using JS fetch (Traditional way)
+2. Form submission to backend
+
 
 Next:
 1. Exception Handling 
@@ -31,3 +47,7 @@ Next:
 4. Git 
 5. Frontend Connectivity
 6. Spring Security 
+7. HttpSession
+8. PasswordEncoder 
+9. Spring Banner and LOG LEVELS
+

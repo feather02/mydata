@@ -81,13 +81,9 @@ public class FacultyController {
         return "facultyDashboard";
     }
 
-
-
-
     @GetMapping("/faculty/logout")
     public String logoutFaculty(HttpSession session) {
         session.invalidate(); // Clear session
-        return "redirect:/" +
-                "";
+        return "redirect:/";
     }
 }
