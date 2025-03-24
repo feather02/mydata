@@ -10,6 +10,10 @@
 <body>
     <h1 th:text="${message}"></h1>
     <button th:onclick="showAlert()">Click Me</button>
+    <br>
+    <h2 th:text="#{welcome.message}" th:fragment="message"></h2>
+    <h2 th:insert="~{home :: message}"></h2>
+    <br>
 
     <div class="container">
         <div class="row">
@@ -17,9 +21,9 @@
           <thead>
            <tr>
                <th>Index</th>
-            <th>Employee First Name</th>
-            <th>Employee Last Name</th>
-            <th>Employee Email</th>
+                <th>Employee First Name</th>
+                <th>Employee Last Name</th>
+                <th>Employee Email</th>
            </tr>
           </thead>
           <tbody>
