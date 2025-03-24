@@ -39,6 +39,11 @@ Spring Data JPA - Intro , REST API's, Relationships
 1. Front End Connectivity  - using JS fetch (Traditional way)
 2. Form submission to backend
 
+24/03/2025
+1. Thymeleaf template
+2. Thymeleaf GET/POST
+3. Thymeleaf each, text , if , unless, switch , case, object, field
+4. Thymeleaf expressions - 5 
 
 Next:
 1. Exception Handling 
@@ -50,4 +55,5 @@ Next:
 7. HttpSession
 8. PasswordEncoder 
 9. Spring Banner and LOG LEVELS
-
+10. Default Error Page
+11. Internationalization
